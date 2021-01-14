@@ -20,10 +20,10 @@ class CreateProductsTable extends Migration
             $table->string('description', 1000);
             $table->integer('quantity')->unsigned();
             $table->string('status')->default(Product::UNAVAILABLE_PRODUCT);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('seller_id');
             $table->timestamps();
-
+            //foreign key added using seller_id
             $table->foreign('seller_id')->references('id')->on('users');
         });
     }

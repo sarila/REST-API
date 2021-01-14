@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 
@@ -47,12 +49,30 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
+    //Overwrite render to show choosen message
     public function render($request, Exception $exception)
     {
         if ($exception instanceof ValidationException) {
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
+
+        if ($exception instanceof ModelNotFoundException) {
+            // $modelName = $exception->getModel() shows namespace also i.e App/User
+            // class_basename astracts only class of model and doesnot shows namespace
+            $modelName = strtolower(class_basename($exception->getModel()));
+            return $this->errorResponse("Does not exists any {$modelName} with the specified indentificator", 404);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $exception);
+        }
         return parent::render($request, $exception);
+    }
+
+    //to show error response if authentication problem occurs
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return $this->errorResponse('Unathenticated User.', 401);
     }
 
      /**

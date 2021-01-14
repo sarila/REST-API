@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ApiController;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\response;
 
-class userController extends Controller
+class userController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class userController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json(['data' => $users , 200]);
+        return $this->showAll($users);
     }
 
 
@@ -45,7 +45,7 @@ class userController extends Controller
         $data['admin'] = User::REGULAR_USER;
 
         $user = User::create($data);
-        return response()->json(['data' => $user , 201]);
+        return $this->showOne($user, 201);
 
     }
 
@@ -59,7 +59,7 @@ class userController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return response()->json(['data' => $user , 200]);
+        return $this->showOne($user);
     }
 
     /**
@@ -108,19 +108,19 @@ class userController extends Controller
 
         if($request->has('admin')) {
             if(!$user->isVerified()) {
-                return response()->json(['error' => 'Only verified users can modify the admin field', 'code' => 409], 409);
+                return $this->errorResponse('Only verified users can modify the admin field',409);
             }
 
             $user->admin = $request->admin;
         }
 
         if(!$user->isDirty()) {
-            return response()->json(['error' => 'You need to change a different value to update', 'code' =>422], 422);
+            return $this->errorResponse('You need to change a different value to update', 422);
         }
 
         $user->save();
 
-        return response()->json(['data' => $user],200);
+        return $this->showOne($user);
     }
 
     /**
@@ -133,6 +133,7 @@ class userController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return response()->json(['data' => $user , 'message' => 'User Deleted Sucessfully'], 200);
+        return $this->showOne($user);
+        
     }
 }

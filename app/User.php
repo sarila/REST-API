@@ -43,6 +43,26 @@ class User extends Authenticatable
         'remember_token',
          'verification_token',
     ];
+    //Accessor and Mutator for Name Field
+    //for Mutator 
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = $name;
+    }
+
+    //for Accessor
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    //Mutator for email
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
+
 
     /**
      * The attributes that should be cast to native types.

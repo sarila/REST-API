@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('seller_id');
             $table->timestamps();
+            $table->softDeletes();
             //foreign key added using seller_id
             $table->foreign('seller_id')->references('id')->on('users');
         });

@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\User;
 use Illuminate\Http\Request;
 
-class userController extends ApiController
+class UserController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -55,10 +55,8 @@ class userController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-
         return $this->showOne($user);
     }
 
@@ -129,9 +127,8 @@ class userController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
         return $this->showOne($user);
         

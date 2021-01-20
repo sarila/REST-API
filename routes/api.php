@@ -28,6 +28,10 @@ Route::resource('categories.buyers', 'CategoryBuyerController', ['only' => ['ind
 Route::resource('products', 'ProductController', ['only' => ['index', 'show']]);
 
 Route::resource('sellers', 'SellerController', ['only' => ['index', 'show']]);
+Route::resource('sellers.transactions', 'SellerTransactionController', ['only' => ['index']]);
+Route::resource('sellers.categories', 'SellerCategoryController', ['only' => ['index']]);
+Route::resource('sellers.buyers', 'SellerBuyerController', ['only' => ['index']]);
+Route::resource('sellers.products', 'SellerProductController', ['except' => ['create', 'edit', 'show']]);
 
 Route::resource('transactions', 'TransactionController', ['only' => ['index', 'show']]);
 Route::resource('transactions.categories', 'TransactionCategoryController', ['only' => ['index']]);

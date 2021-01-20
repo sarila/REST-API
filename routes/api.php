@@ -14,6 +14,10 @@ use Illuminate\Http\Request;
 */
 // Restricts buyer to only two methods index and show
 Route::resource('buyers', 'BuyerController', ['only' => ['index', 'show']]);
+Route::resource('buyers.transactions', 'BuyerTransactionController', ['only' => ['index']]);
+Route::resource('buyers.products', 'BuyerProductController', ['only' => ['index']]);
+Route::resource('buyers.sellers', 'BuyerSellerController', ['only' => ['index']]);
+Route::resource('buyers.categories', 'BuyerCategoryController', ['only' => ['index']]);
 
 Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
 

@@ -36,8 +36,8 @@ class CategoryTransformer extends TransformerAbstract
             'identifier' => (int)$category->id,
             'title' =>(string)$category->name,
             'details' =>(string)$category->description,
-            'creationDate' => $category->created_at,
-            'lastChange' => $category->updated_at,
+            'creationDate' => (string)$category->created_at,
+            'lastChange' => (string)$category->updated_at,
             // can be both null value or the date
             'deletedDate' => isset($category->deleted_at) ? (string) $category->deleted_at : null,
         ];

@@ -4,11 +4,14 @@ namespace App;
 
 use App\Scopes\BuyerScope;
 use App\Transaction;
+use App\Transformers\BuyerTransformer;
 use App\User;
 
 
 class Buyer extends User
 {
+
+	public $transformer = BuyerTransformer::class;
 	//Accessing global scope
 	protected static function boot(){
 		parent::boot();

@@ -19,8 +19,7 @@ class BuyerController extends ApiController
 
         return $this->showAll($buyers);
     }
-
-   
+  
     /**
      * Display the specified resource.
      *
@@ -31,6 +30,4 @@ class BuyerController extends ApiController
     {
         return $this->showOne($buyer);
     }
-
-    
 }

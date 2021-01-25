@@ -18,9 +18,6 @@ class TransactionController extends ApiController
         $transactions = Transaction::all();
         return $this->showAll($transactions);
     }
-
- 
-
     
     /**
      * Display the specified resource.

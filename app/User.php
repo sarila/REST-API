@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class User extends Model
     const ADMIN_USER ='true';
     const REGULAR_USER ='false';
 
+    public $transformer = UserTransformer::class;
     protected $table = 'users';
     protected $dates = ['deletes_at'];
 

@@ -19,9 +19,6 @@ class ProductController extends ApiController
         return $this->showAll($products);
     }
 
-    
-
-
     /**
      * Display the specified resource.
      *
@@ -32,6 +29,4 @@ class ProductController extends ApiController
     {
         return $this->showOne($product);
     }
-
-    
 }

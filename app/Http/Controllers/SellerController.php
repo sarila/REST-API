@@ -30,7 +30,5 @@ class SellerController extends ApiController
     public function show(Seller $seller)
     {
         return $this->showOne($seller);
-    }
-
-    
+    }   
 }

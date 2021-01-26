@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 
@@ -31,6 +32,7 @@ trait ApiResponser
 
 		$collection = $this->filterData($collection, $transformer);
 		$collection = $this->sortData($collection, $transformer);
+		$collection = $this->paginate($collection);
 		$collection = $this->transformData($collection, $transformer);
 
 		return $this->successResponse(['data' => $collection], $code);
@@ -69,6 +71,23 @@ trait ApiResponser
 		}
 
 		return $collection;
+	}
+
+	//for pagination of data
+	protected function paginate(Collection $collection)
+	{
+		$page = LengthAwarePaginator::resolveCurrentPage();
+
+		$perPage = 15;
+		$results = $collection->slice(($page -1) * $perPage, $perPage)->values();
+
+		$paginated = new LengthAwarePaginator($results, $collection->count(), $perPage, $page, [
+			'path' => LengthAwarePaginator::resolveCurrentPath(), 
+		]);
+
+		$paginated->appends(request()->all());
+
+		return $paginated;
 	}
 
 	//new method for transformation of recieved data

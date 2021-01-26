@@ -30,6 +30,7 @@ class BuyerTransformer extends TransformerAbstract
      *
      * @return array
      */
+
     public function transform(Buyer $buyer)
     {
         return [
@@ -41,6 +42,34 @@ class BuyerTransformer extends TransformerAbstract
             'lastChange' => (string)$buyer->updated_at,
             // can be both null value or the date
             'deletedDate' => isset($buyer->deleted_at) ? (string) $buyer->deleted_at : null,
+
+            //HATEOAS
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('buyers.show', $buyer->id),
+                ],
+                [
+                    'rel' => 'buyer.categories',
+                    'href' => route('buyers.categories.index', $buyer->id),
+                ],
+                [
+                    'rel' => 'buyer.products',
+                    'href' => route('buyers.products.index', $buyer->id),
+                ],
+                [
+                    'rel' => 'buyer.sellers',
+                    'href' => route('buyers.sellers.index', $buyer->id),
+                ],
+                [
+                    'rel' => 'buyer.transactions',
+                    'href' => route('buyers.transactions.index', $buyer->id),
+                ],
+                  [
+                    'rel' => 'user',
+                    'href' => route('users.show', $buyer->id),
+                ],
+            ],
         ];
     }
 

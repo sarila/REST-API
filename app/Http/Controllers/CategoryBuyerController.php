@@ -26,7 +26,5 @@ class CategoryBuyerController extends ApiController
         ->values();
 
         return $this->showAll($buyers);
-    }
-
-   
+    }   
 }

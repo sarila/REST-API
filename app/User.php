@@ -2,16 +2,16 @@
 namespace App;
 
 use App\Transformers\UserTransformer;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Model
 {
-    use Notifiable, SoftDeletes, HasApiTokens;
+    use Notifiable, SoftDeletes, HasApiTokens, Authenticatable;
 
     const VERIFIED_USER ='1';
     const UNVERIFIED_USER ='0';
@@ -65,8 +65,6 @@ class User extends Model
     {
         $this->attributes['email'] = strtolower($email);
     }
-
-
 
     /**
      * The attributes that should be cast to native types.

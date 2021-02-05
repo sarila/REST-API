@@ -58,7 +58,4 @@ Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
 
 //Routes added for lravel Passport
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
-Route::post('oauth/authorize', '\Laravel\Passport\Http\Controllers\ApproveAuthorizationController@approve');
-Route::get('oauth/authorize', '\Laravel\Passport\Http\Controllers\AuthorizationController@authorize');
-Route::delete('oauth/authorize ', '\Laravel\Passport\Http\Controllers\DenyAuthorizationController@deny');
 

@@ -33,7 +33,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @if (Auth::check())
+                        <li><a href="{{route('personal-tokens')}}">My Tokens</a></li>&nbsp;&nbsp;&nbsp;
+                        <li><a href="{{route('personal-clients')}}">My Clients</a></li>&nbsp;&nbsp;&nbsp;
+                        <li><a href="{{route('authorized-clients')}}">Authorized Clients</a></li>&nbsp;&nbsp;&nbsp;
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -42,8 +46,7 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            
+                            </li> 
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

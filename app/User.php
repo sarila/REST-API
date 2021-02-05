@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Model
+class User extends Model implements \Illuminate\Contracts\Auth\Authenticatable
 {
     use Notifiable, SoftDeletes, HasApiTokens, Authenticatable;
 

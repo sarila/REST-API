@@ -53,9 +53,9 @@ Route::resource('transactions.sellers', 'TransactionSellerController', ['only' =
 
 
 //Routes for user
+Route::name('me')->get('users/me', 'UserController@me');
 Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
 
-
-//Routes added for lravel Passport
+//Routes added for laravel Passport
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 

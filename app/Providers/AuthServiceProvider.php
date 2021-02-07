@@ -40,6 +40,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        //Defines gate (to provice access only to admin)
+        Gate::define('admin-action', function($user) {
+            return $user->isAdmin();
+        });
 
         Passport::routes();
         Passport::tokensExpireIn(Carbon::now()->addhours(1));

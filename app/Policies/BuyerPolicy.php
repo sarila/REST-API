@@ -2,14 +2,15 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Buyer;
+use App\Traits\AdminActions;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BuyerPolicy
 {
-    use HandlesAuthorization;
-    
+    use HandlesAuthorization, AdminActions;
+
     /**
      * Determine whether the user can restore the buyer.
      *

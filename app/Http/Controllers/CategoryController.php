@@ -25,6 +25,7 @@ class CategoryController extends ApiController
      */
     public function index()
     {
+        $this->allowedAdminAction();
         $categories = Category::all();
 
         return $this->showAll($categories);
@@ -39,6 +40,8 @@ class CategoryController extends ApiController
      */
     public function store(Request $request)
     {
+        $this->allowedAdminAction();
+
         $rules = [
             'name' => 'required',
             'description' => 'required',
@@ -72,6 +75,8 @@ class CategoryController extends ApiController
      */
     public function update(Request $request, Category $category)
     {
+        $this->allowedAdminAction();
+        
         $category->fill($request->only([
             'name',
             'description',

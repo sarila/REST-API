@@ -50,6 +50,12 @@ trait ApiResponser
 		return $this->successResponse($instance, $code);
 	}
 
+	//To show Message
+	protected function showMessage($message, $code = 200)
+	{
+		return $this->successResponse(['data' => $message], $code);
+	}
+
 	//new method for searching and sorting of data
 	protected function sortData(Collection $collection, $transformer)
 	{

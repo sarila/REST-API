@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
         Transaction::truncate();
         DB::table('category_product')->truncate();
 
+        //Disables any eventlistener operated in model while creating fake data
+        User::flushEventListeners();
+        Category::flushEventListeners();
+        Product::flushEventListeners();
+        Transaction::flushEventListeners();
+
         $usersQuantity = 20;
         $categoriesQuantity = 5;
         $productsQuantity = 15;

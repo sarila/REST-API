@@ -45,7 +45,7 @@ class User extends Model implements \Illuminate\Contracts\Auth\Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-         'verification_token',
+        'verification_token',
     ];
     //Accessor and Mutator for Name Field
     //for Mutator 
